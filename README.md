@@ -1,25 +1,19 @@
-# dora-plugin-hmr
+# dora-plugin-webpack-hmr
 
-HMR plugin for dora based on [babel-plugin-react-transform](https://github.com/gaearon/babel-plugin-react-transform).
+HMR plugin for dora with webpack-hot-middleware.
 
 ---
-
-![](https://cloud.githubusercontent.com/assets/1539088/11611771/ae1a6bd8-9bac-11e5-9206-42447e0fe064.gif)
-
-## Feature
-
-- enables hot reloading using HMR API
-- catches errors inside `render()`
 
 ## Usage
 
 ```bash
-$ dora --plugins hmr
+$ dora --plugins webpack-hmr
+
+// Disable reload if hmr get stuck
+$ dora --plugins webpack-hmr?reload=false
 ```
 
-## Test
+## Config
 
-```bash
-$ cd examples/normal
-$ npm run dev
-```
+You can use all config from [webpack-hot-middleware](https://github.com/glenjamin/webpack-hot-middleware#config).
+

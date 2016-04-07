@@ -1,6 +1,7 @@
 import hotMiddleware from 'webpack-hot-middleware';
 import webpack from 'atool-build/lib/webpack';
 import { join } from 'path';
+import { stringify } from 'querystring';
 
 export default {
 
@@ -18,8 +19,13 @@ export default {
   },
 
   'webpack.updateConfig.finally'(webpackConfig) {
-    const { port } = this;
-    const hotEntry = `webpack-hot-middleware/client?path=http://127.0.0.1:${port}/__webpack_hmr`;
+    const { port, query } = this;
+    const defaultOpts = {
+      path: `http://127.0.0.1:${port}/__webpack_hmr`,
+      reload: true,
+    };
+    const opts = {...defaultOpts, ...query};
+    const hotEntry = `webpack-hot-middleware/client?${stringify(opts)}`;
 
     function updateWebpackConfig(config) {
       config.entry = Object.keys(config.entry).reduce((memo, key) => {
