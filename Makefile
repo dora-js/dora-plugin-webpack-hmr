@@ -4,5 +4,5 @@ publish:
 	npm publish
 
 publish-sync: publish
-	cnpm sync dora-plugin-hmr
-	tnpm sync dora-plugin-hmr
+	cnpm sync dora-plugin-webpack-hmr
+	tnpm sync dora-plugin-webpack-hmr
