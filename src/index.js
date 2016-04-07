@@ -20,11 +20,21 @@ export default {
   'webpack.updateConfig.finally'(webpackConfig) {
     const { port } = this;
     const hotEntry = `webpack-hot-middleware/client?path=http://127.0.0.1:${port}/__webpack_hmr`;
+
+    function updateWebpackConfig(config) {
+      config.entry = Object.keys(config.entry).reduce((memo, key) => {
+        memo[key] = [hotEntry].concat(config.entry[key]);
+        return memo;
+      }, {});
+      return config;
+    }
+
     // 修改 entry, 加上 webpack-hot-middleware/client
-    webpackConfig.entry = Object.keys(webpackConfig.entry).reduce((memo, key) => {
-      memo[key] = [hotEntry].concat(webpackConfig.entry[key]);
-      return memo;
-    }, {});
+    if (Array.isArray(webpackConfig)) {
+      webpackConfig = webpackConfig.map(updateWebpackConfig);
+    } else {
+      webpackConfig = updateWebpackConfig(webpackConfig);
+    }
 
     // Hot reload plugin
     webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
