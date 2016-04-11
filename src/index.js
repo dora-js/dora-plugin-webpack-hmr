@@ -3,6 +3,8 @@ import webpack from 'atool-build/lib/webpack';
 import { join } from 'path';
 import { stringify } from 'querystring';
 
+let middleware = null;
+
 export default {
 
   'middleware'() {
@@ -12,7 +14,9 @@ export default {
     }
 
     return function* (next) {
-      const middleware = hotMiddleware(compiler);
+      if (!middleware) {
+        middleware = hotMiddleware(compiler);
+      }
       yield middleware.bind(null, this.req, this.res);
       yield next;
     };
