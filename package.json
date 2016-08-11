@@ -1,6 +1,6 @@
 {
   "name": "dora-plugin-webpack-hmr",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/dora-js/dora-plugin-webpack-hmr"
@@ -14,7 +14,6 @@
     "test": "mocha --require babel-core/register --no-timeouts",
     "lint": "eslint --ext .js src"
   },
-  "pre-commit": [],
   "dependencies": {
     "babel-core-resolve-enhance": "~0.1.1",
     "babel-runtime": "^6.11.6",
